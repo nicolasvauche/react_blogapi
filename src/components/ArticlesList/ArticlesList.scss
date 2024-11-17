@@ -1,0 +1,17 @@
+.articles-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+        margin-bottom: 0.5rem;
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import "./variables";
+@import "./reset";
+
+body {
+    font-family: $font-family;
+    color: $text-color;
+    background-color: $background-color;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    color: $secondary-color;
+}
+
+h2 {
+    color: $primary-color;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+        margin-bottom: 1rem;
+    }
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
