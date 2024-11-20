@@ -52,6 +52,11 @@ const Navigation = () => {
               </NavLink>
             </li>
           ))}
+        {isAuthenticated && (
+          <li>
+            <NavLink to='/add-post'>Nouvel article</NavLink>
+          </li>
+        )}
       </ul>
       <ul>
         {authStatus === 'loading' ? (

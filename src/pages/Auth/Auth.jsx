@@ -64,7 +64,11 @@ const Auth = () => {
             'Se connecter'
           )}
         </button>
-        {error && <p className='error'>Erreur : {error}</p>}
+        {error && (
+          <div className='error-message'>
+            <p>⚠️ {error.error}</p>
+          </div>
+        )}
       </form>
     </div>
   )

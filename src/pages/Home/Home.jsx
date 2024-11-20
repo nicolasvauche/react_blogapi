@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchLatestPosts } from '../../features/home/homeSlice'
 import './Home.scss'
 
 const Home = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
   const { latestPosts, status, error } = useSelector(state => state.home)
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchLatestPosts())
-    }
-  }, [status, dispatch])
+    dispatch(fetchLatestPosts())
+  }, [location, dispatch])
 
   return (
     <div className='home'>

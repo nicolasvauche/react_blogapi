@@ -5,7 +5,8 @@ const API_URL = 'http://127.0.0.1:8000/api/posts/latest'
 
 export const fetchLatestPosts = createAsyncThunk(
   'home/fetchLatestPosts',
-  async () => {
+  async (_, { getState }) => {
+    const { home } = getState()
     const response = await axios.get(API_URL)
     return response.data
   }

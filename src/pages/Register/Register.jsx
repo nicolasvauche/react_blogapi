@@ -94,7 +94,13 @@ const Register = () => {
           />
         </div>
         <button type='submit' disabled={status === 'loading'}>
-          {status === 'loading' ? 'Création...' : 'Créer un compte'}
+          {status === 'loading' ? (
+            <span>
+              <i className='spinner'></i> Création...
+            </span>
+          ) : (
+            'Créer mon compte'
+          )}
         </button>
         {error && <p className='error'>Erreur : {error}</p>}
       </form>

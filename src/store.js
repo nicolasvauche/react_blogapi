@@ -8,6 +8,7 @@ import postDetailReducer from './features/post/postDetailSlice'
 import homeReducer from './features/home/homeSlice'
 import authorReducer from './features/author/authorSlice'
 import registerReducer from './features/register/registerSlice'
+import postAddReducer from './features/postAdd/postAddSlice'
 
 const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
     postDetail: postDetailReducer,
     home: homeReducer,
     author: authorReducer,
-    register: registerReducer
+    register: registerReducer,
+    addPost: postAddReducer
   }
 })
 
