@@ -1,15 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../../features/auth/authSlice'
+import { checkAuth } from '../../features/authCheck/authCheckSlice'
 import './Auth.scss'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { isAuthenticated } = useSelector(state => state.authCheck)
+  const { status, error } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated, navigate])
+
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('Email:', email)
-    console.log('Password:', password)
-    // Appelle l'API d'authentification ici
+    dispatch(login({ email, password })).then(action => {
+      if (action.meta.requestStatus === 'fulfilled') {
+        dispatch(checkAuth())
+        navigate('/')
+      }
+    })
   }
 
   return (
@@ -36,7 +55,16 @@ const Auth = () => {
             required
           />
         </div>
-        <button type='submit'>Se connecter</button>
+        <button type='submit' disabled={status === 'loading'}>
+          {status === 'loading' ? (
+            <span>
+              <i className='spinner'></i> Connexion...
+            </span>
+          ) : (
+            'Se connecter'
+          )}
+        </button>
+        {error && <p className='error'>Erreur : {error}</p>}
       </form>
     </div>
   )

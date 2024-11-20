@@ -51,4 +51,29 @@
             background-color: darken($secondary-color, 10%);
         }
     }
+
+    button.loading {
+        cursor: wait;
+        opacity: 0.8;
+      }
+      
+      .spinner {
+        border: 2px solid transparent;
+        border-top: 2px solid #ffffff;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: inline-block;
+        margin-right: 5px;
+        animation: spin 0.8s linear infinite;
+      }
+      
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 }

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import {
   fetchPostDetails,
   resetPostDetail
-} from '../../features/postDetail/postDetailSlice'
+} from '../../features/post/postDetailSlice'
 import {
   fetchAuthorDetails,
   resetAuthorDetail
@@ -27,14 +27,12 @@ const PostDetail = () => {
     error: authorError
   } = useSelector(state => state.author)
 
-  // Reset post and author details when slug changes
   useEffect(() => {
     dispatch(resetPostDetail())
     dispatch(resetAuthorDetail())
     dispatch(fetchPostDetails(slug))
   }, [slug, dispatch])
 
-  // Fetch author details when post is fetched
   useEffect(() => {
     if (
       postStatus === 'succeeded' &&
@@ -47,32 +45,45 @@ const PostDetail = () => {
     }
   }, [post, postStatus, authorStatus, dispatch])
 
-  // Loading and error states
-  if (postStatus === 'loading' || authorStatus === 'loading') {
-    return <p>Chargement des détails de l'article...</p>
-  }
-
-  if (postStatus === 'failed') {
-    return <p>Erreur lors du chargement de l'article : {postError}</p>
-  }
-
-  if (authorStatus === 'failed') {
-    return <p>Erreur lors du chargement de l'auteur : {authorError}</p>
-  }
-
-  if (!post) return <p>Aucun article trouvé.</p>
-
   return (
     <div className='post'>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <p>
-        <strong>Publié le :</strong>{' '}
-        {new Date(post.updatedAt).toLocaleDateString()}
-      </p>
-      <p>
-        <strong>Auteur :</strong> {author ? author.name : 'Chargement...'}
-      </p>
+      <header>
+        <h1>{post?.title || 'Chargement...'}</h1>
+      </header>
+
+      <section>
+        <h2>Contenu de l'article</h2>
+        {postStatus === 'loading' && (
+          <p>Chargement des détails de l'article...</p>
+        )}
+        {postStatus === 'failed' && (
+          <p>Erreur lors du chargement de l'article : {postError}</p>
+        )}
+        {postStatus === 'succeeded' && post && (
+          <div>
+            <p>{post.content}</p>
+            <p>
+              <strong>Publié le :</strong>{' '}
+              {new Date(post.updatedAt).toLocaleDateString()}
+            </p>
+          </div>
+        )}
+      </section>
+
+      <section>
+        <h2>Auteur</h2>
+        {authorStatus === 'loading' && (
+          <p>Chargement des informations de l'auteur...</p>
+        )}
+        {authorStatus === 'failed' && (
+          <p>Erreur lors du chargement de l'auteur : {authorError}</p>
+        )}
+        {authorStatus === 'succeeded' && author && (
+          <p>
+            <strong>Nom :</strong> {author.name}
+          </p>
+        )}
+      </section>
     </div>
   )
 }

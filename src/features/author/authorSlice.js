@@ -5,7 +5,7 @@ export const fetchAuthorDetails = createAsyncThunk(
   'author/fetchAuthorDetails',
   async authorSlug => {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/users/${authorSlug}`
+      `http://127.0.0.1:8000/api/users/details/${authorSlug}`
     )
     return response.data
   }

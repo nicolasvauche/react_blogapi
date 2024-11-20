@@ -14,19 +14,32 @@ const Home = () => {
     }
   }, [status, dispatch])
 
-  if (status === 'loading') return <p>Chargement...</p>
-  if (status === 'failed') return <p>Erreur : {error}</p>
-
   return (
     <div className='home'>
-      <h1>Les derniers articles</h1>
-      <ul>
-        {latestPosts.map(post => (
-          <li key={post.id}>
-            <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
-          </li>
-        ))}
-      </ul>
+      <h1>Bienvenue sur notre blog</h1>
+      <p>
+        Découvrez les derniers articles ou explorez les catégories pour en
+        savoir plus.
+      </p>
+
+      <section>
+        <h2>Les derniers articles</h2>
+        {status === 'loading' && <p>Chargement des articles...</p>}
+        {status === 'failed' && <p>Erreur : {error}</p>}
+        {status === 'succeeded' && latestPosts.length > 0 ? (
+          <ul>
+            {latestPosts.map(post => (
+              <li key={post.id}>
+                <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          status === 'succeeded' && (
+            <p>Aucun article disponible pour le moment.</p>
+          )
+        )}
+      </section>
     </div>
   )
 }

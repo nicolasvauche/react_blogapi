@@ -18,7 +18,13 @@ const categoryDetailSlice = createSlice({
     status: 'idle',
     error: null
   },
-  reducers: {},
+  reducers: {
+    resetCategoryDetail: state => {
+      state.category = null
+      state.status = 'idle'
+      state.error = null
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchCategoryDetails.pending, state => {
@@ -35,4 +41,5 @@ const categoryDetailSlice = createSlice({
   }
 })
 
+export const { resetCategoryDetail } = categoryDetailSlice.actions
 export default categoryDetailSlice.reducer

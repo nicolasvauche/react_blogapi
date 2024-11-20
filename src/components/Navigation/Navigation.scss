@@ -16,10 +16,27 @@ nav {
 
         li {
             margin-bottom: 0;
+            color: white;
 
             a {
                 text-decoration: none;
                 color: white;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+
+            button {
+                font-size: 1rem;
+                background-color: transparent;
+                border: none;
+                color: white;
+                cursor: pointer;
 
                 &:hover {
                     text-decoration: underline;
