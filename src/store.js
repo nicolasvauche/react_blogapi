@@ -7,6 +7,7 @@ import postsReducer from './features/post/postSlice'
 import postDetailReducer from './features/post/postDetailSlice'
 import homeReducer from './features/home/homeSlice'
 import authorReducer from './features/author/authorSlice'
+import registerReducer from './features/register/registerSlice'
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     posts: postsReducer,
     postDetail: postDetailReducer,
     home: homeReducer,
-    author: authorReducer
+    author: authorReducer,
+    register: registerReducer
   }
 })
 
