@@ -8,10 +8,11 @@ const Home = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const { latestPosts, status, error } = useSelector(state => state.home)
+  const { isAuthenticated } = useSelector(state => state.authCheck)
 
   useEffect(() => {
     dispatch(fetchLatestPosts())
-  }, [location, dispatch])
+  }, [location, isAuthenticated, dispatch])
 
   return (
     <div className='home'>
@@ -30,6 +31,14 @@ const Home = () => {
             {latestPosts.map(post => (
               <li key={post.id}>
                 <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
+                {post.canEdit && (
+                  <>
+                    &nbsp;•&nbsp;
+                    <a href={`/admin/posts/${post.slug}/edit`}>Edit</a>
+                    &nbsp;•&nbsp;
+                    <a href={`/admin/posts/${post.slug}/delete`}>Delete</a>
+                  </>
+                )}
               </li>
             ))}
           </ul>

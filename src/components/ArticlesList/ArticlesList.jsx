@@ -12,6 +12,10 @@ const ArticlesList = ({ articles }) => {
       {articles.map(article => (
         <li key={article.id}>
           <a href={`/posts/${article.slug}`}>{article.title}</a>
+          {article.canEdit && (
+            <a href={`/admin/posts/${article.slug}/edit`}>Edit</a>
+          )}
+          {article.canEdit}
         </li>
       ))}
     </ul>

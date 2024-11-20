@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-
-const API_URL = 'http://127.0.0.1:8000/api/posts/latest'
+import axiosInstance from '../../axios'
 
 export const fetchLatestPosts = createAsyncThunk(
   'home/fetchLatestPosts',
-  async (_, { getState }) => {
-    const { home } = getState()
-    const response = await axios.get(API_URL)
-    return response.data
+  async (_, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get('/posts/latest')
+      return response.data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || 'Erreur inconnue')
+    }
   }
 )
 

@@ -24,11 +24,13 @@ const CategoryDetail = () => {
     error: postsError
   } = useSelector(state => state.posts)
 
+  const { isAuthenticated } = useSelector(state => state.authCheck)
+
   useEffect(() => {
     dispatch(resetCategoryDetail())
     dispatch(fetchCategoryDetails(slug))
     dispatch(fetchCategoryPosts(slug))
-  }, [slug, dispatch])
+  }, [slug, isAuthenticated, dispatch])
 
   return (
     <div className='category'>
@@ -46,6 +48,14 @@ const CategoryDetail = () => {
             {posts.map(post => (
               <li key={post.id}>
                 <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
+                {post.canEdit && (
+                  <>
+                    &nbsp;•&nbsp;
+                    <a href={`/admin/posts/${post.slug}/edit`}>Edit</a>
+                    &nbsp;•&nbsp;
+                    <a href={`/admin/posts/${post.slug}/delete`}>Delete</a>
+                  </>
+                )}
               </li>
             ))}
           </ul>
