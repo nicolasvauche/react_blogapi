@@ -6,6 +6,7 @@ import PostDetail from './pages/PostDetail/PostDetail'
 import Auth from './pages/Auth/Auth'
 import Register from './pages/Register/Register'
 import AddPost from './pages/AddPost/AddPost'
+import EditPost from './pages/EditPost/EditPost'
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path='/auth' element={<Auth />} />
       <Route path='/register' element={<Register />} />
       <Route path='/add-post' element={<AddPost />} />
+      <Route path='/edit-post/:slug' element={<EditPost />} />
     </Routes>
   )
 }

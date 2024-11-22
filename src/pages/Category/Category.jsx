@@ -6,6 +6,7 @@ import {
   resetCategoryDetail
 } from '../../features/categoryDetail/categoryDetailSlice'
 import { fetchCategoryPosts } from '../../features/post/postSlice'
+import { FaPencil, FaRegTrashCan } from 'react-icons/fa6'
 import './Category.scss'
 
 const CategoryDetail = () => {
@@ -50,10 +51,20 @@ const CategoryDetail = () => {
                 <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
                 {post.canEdit && (
                   <>
-                    &nbsp;•&nbsp;
-                    <a href={`/admin/posts/${post.slug}/edit`}>Edit</a>
-                    &nbsp;•&nbsp;
-                    <a href={`/admin/posts/${post.slug}/delete`}>Delete</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a
+                      href={`/edit-post/${post.slug}`}
+                      className='text-info'
+                    >
+                      <FaPencil />
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a
+                      href={`/admin/posts/${post.slug}/delete`}
+                      className='text-danger'
+                    >
+                      <FaRegTrashCan />
+                    </a>
                   </>
                 )}
               </li>

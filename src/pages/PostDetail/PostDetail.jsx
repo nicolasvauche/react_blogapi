@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom'
 import {
   fetchPostDetails,
   resetPostDetail
-} from '../../features/post/postDetailSlice'
+} from '../../features/postDetail/postDetailSlice'
 import {
   fetchAuthorDetails,
   resetAuthorDetail
 } from '../../features/author/authorSlice'
+import { FaPencil, FaRegTrashCan } from 'react-icons/fa6'
 import './PostDetail.scss'
 
 const PostDetail = () => {
@@ -71,7 +72,6 @@ const PostDetail = () => {
       </section>
 
       <section>
-        <h2>Auteur</h2>
         {authorStatus === 'loading' && (
           <p>Chargement des informations de l'auteur...</p>
         )}
@@ -80,10 +80,30 @@ const PostDetail = () => {
         )}
         {authorStatus === 'succeeded' && author && (
           <p>
-            <strong>Nom :</strong> {author.name}
+            <strong>Auteur :</strong> {author.name}
           </p>
         )}
       </section>
+
+      {postStatus === 'succeeded' && post && (
+        <section>
+          {post.canEdit && (
+            <p>
+              &nbsp;&nbsp;&nbsp;
+              <a href={`/edit-post/${post.slug}`} className='text-info'>
+                <FaPencil />
+              </a>
+              &nbsp;&nbsp;&nbsp;
+              <a
+                href={`/admin/posts/${post.slug}/delete`}
+                className='text-danger'
+              >
+                <FaRegTrashCan />
+              </a>
+            </p>
+          )}
+        </section>
+      )}
     </div>
   )
 }

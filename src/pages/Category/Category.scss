@@ -2,4 +2,14 @@
 
 .category {
     padding: 2rem;
+
+    .text-info {
+        font-size: 1.25rem;
+        color: #0000ff;
+    }
+
+    .text-danger {
+        font-size: 1.25rem;
+        color: #ff0000;
+    }
 }

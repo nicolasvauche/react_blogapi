@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchLatestPosts } from '../../features/home/homeSlice'
+import { FaPencil, FaRegTrashCan } from 'react-icons/fa6'
 import './Home.scss'
 
 const Home = () => {
@@ -33,10 +34,20 @@ const Home = () => {
                 <NavLink to={`/articles/${post.slug}`}>{post.title}</NavLink>
                 {post.canEdit && (
                   <>
-                    &nbsp;•&nbsp;
-                    <a href={`/admin/posts/${post.slug}/edit`}>Edit</a>
-                    &nbsp;•&nbsp;
-                    <a href={`/admin/posts/${post.slug}/delete`}>Delete</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a
+                      href={`/edit-post/${post.slug}`}
+                      className='text-info'
+                    >
+                      <FaPencil />
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a
+                      href={`/admin/posts/${post.slug}/delete`}
+                      className='text-danger'
+                    >
+                      <FaRegTrashCan />
+                    </a>
                   </>
                 )}
               </li>

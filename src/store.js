@@ -4,11 +4,12 @@ import authCheckReducer from './features/authCheck/authCheckSlice'
 import categoryReducer from './features/category/categorySlice'
 import categoryDetailReducer from './features/categoryDetail/categoryDetailSlice'
 import postsReducer from './features/post/postSlice'
-import postDetailReducer from './features/post/postDetailSlice'
+import postDetailReducer from './features/postDetail/postDetailSlice'
 import homeReducer from './features/home/homeSlice'
 import authorReducer from './features/author/authorSlice'
 import registerReducer from './features/register/registerSlice'
 import postAddReducer from './features/postAdd/postAddSlice'
+import postEditReducer from './features/postEdit/postEditSlice'
 
 const store = configureStore({
   reducer: {
@@ -21,7 +22,8 @@ const store = configureStore({
     home: homeReducer,
     author: authorReducer,
     register: registerReducer,
-    addPost: postAddReducer
+    addPost: postAddReducer,
+    editPost: postEditReducer
   }
 })
 
